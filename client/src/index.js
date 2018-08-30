@@ -4,5 +4,17 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+
+// Apollo Setup
+const apolloClient = new ApolloClient({
+  uri: "http://localhost:5000/graphql"
+});
+
+ReactDOM.render(
+  <ApolloProvider client={apolloClient}>
+    <App />
+  </ApolloProvider>,
+  document.getElementById('root'));
 registerServiceWorker();
