@@ -3,12 +3,10 @@ const Schema = mongoose.Schema;
 
 const meetupSchema = new Schema({
   start_time: {
-    type: String,
-    required: true
+    type: String
   },
   end_time: {
-    type: String,
-    required: true
+    type: String
   },
   date: {
     type: String,

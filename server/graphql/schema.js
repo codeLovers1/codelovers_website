@@ -4,6 +4,7 @@ const {
   GraphQLString,
   GraphQLID,
   GraphQLList,
+  GraphQLNonNull,
   GraphQLSchema
 } = graphql;
 const MeetupModel = require('../models/meetup.js');
@@ -12,9 +13,9 @@ const meetupFields = {
   id: { type: GraphQLID },
   start_time: { type: GraphQLString },
   end_time: { type: GraphQLString },
-  date: { type: GraphQLString },
-  topic: { type: GraphQLString },
-  speaker: { type: GraphQLString },
+  date: { type: new GraphQLNonNull(GraphQLString) },
+  topic: { type: new GraphQLNonNull(GraphQLString) },
+  speaker: { type: new GraphQLNonNull(GraphQLString) },
 };
 
 // => Types
