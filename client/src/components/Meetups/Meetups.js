@@ -15,7 +15,7 @@ const meetups = gql`
   }
 `; 
 
-class Meetup extends Component {
+class Meetups extends Component {
   
   displayMeetups() {
     const data = this.props.data;
@@ -46,4 +46,4 @@ class Meetup extends Component {
   }  
 };
 
-export default graphql(meetups)(Meetup);
+export default graphql(meetups)(Meetups);
