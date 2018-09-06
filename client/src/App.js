@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import React, { Component } from "react";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-import './App.css';
-import { NavigationBar } from './components/Common';
-import Meetups from './components/Meetups/Meetups';
-import Header from './components/Header/Header';
+import "./App.css";
+import { NavigationBar } from "./components/Common";
+import Meetups from "./components/Meetups/Meetups";
+import Header from "./components/Header/Header";
 
 // add icons to the library
 library.add(faSpinner);
-
 
 class App extends Component {
   render() {

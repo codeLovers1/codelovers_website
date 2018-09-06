@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost';
+import { gql } from "apollo-boost";
 
 const meetups = gql`
   {
@@ -11,6 +11,6 @@ const meetups = gql`
       speaker
     }
   }
-`; 
+`;
 
 export { meetups };
