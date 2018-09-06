@@ -1,2 +1,3 @@
 export * from "./Nav";
 export * from "./Logo";
+export * from "./SocailMedia.js";
