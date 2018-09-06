@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import './App.css';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-import { NavigationBar, Logo } from './components/Common';
+import './App.css';
+import { NavigationBar } from './components/Common';
 import Meetups from './components/Meetups/Meetups';
+import Header from './components/Header/Header';
+
+// add icons to the library
+library.add(faSpinner);
 
 
 class App extends Component {
@@ -10,10 +16,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavigationBar />
-        <header className="App-header">
-          <Logo logoSpin="App-logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
+        <Header />
         <Meetups />
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.

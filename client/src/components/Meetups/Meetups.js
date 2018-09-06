@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
-
-const meetups = gql`
-  {
-    meetups {
-      id
-      start_time
-      end_time
-      date
-      topic
-      speaker
-    }
-  }
-`; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardText,
+  CardBody,
+  Button
+} from 'reactstrap';
+import { meetups } from '../../queries/meetupQueries';
 
 class Meetups extends Component {
   
@@ -22,26 +20,42 @@ class Meetups extends Component {
 
     if(data.loading) {
       return (
-        <div>
-          <p>Loading...</p>
-        </div>
+        <Col>
+          <FontAwesomeIcon
+            icon="spinner" 
+            spin 
+            size="3x"
+          />
+        </Col>
       );
     } else {
       return data.meetups.map(meetup => (
-        <div key={meetup.id}>
-          <h3>{meetup.topic}</h3>
-          <h3>{meetup.speaker}</h3>
-        </div>
+        <Col key={meetup.id} xs="12" sm="6" md="3" className="mb-3">
+          <Card>
+            <CardHeader>{meetup.topic}</CardHeader>
+            <CardBody>
+              <CardText>On <b>{meetup.date}</b> the meetup starts from <b>{meetup.start_time}</b> to <b>{meetup.end_time}</b>.</CardText>
+              <CardText>Our speaaker is {meetup.speaker} </CardText>
+              <Button outline color="secondary" block>Register</Button>
+            </CardBody>
+          </Card>
+        </Col>
       ));
     }
   }
 
   render() {
     return (
-      <div>
-        <h1>Meetups</h1>
-        { this.displayMeetups() }
-      </div>
+      <Container>
+        <Row className="mt-4">
+          <Col>
+            <h1>Upcoming Meetups</h1>
+          </Col>
+        </Row>
+        <Row>
+          { this.displayMeetups() }
+        </Row>
+      </Container>
     );
   }  
 };
