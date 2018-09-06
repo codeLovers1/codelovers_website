@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { Component } from "react";
+import { graphql } from "react-apollo";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Container,
   Row,
@@ -10,22 +10,17 @@ import {
   CardText,
   CardBody,
   Button
-} from 'reactstrap';
-import { meetups } from '../../queries/meetupQueries';
+} from "reactstrap";
+import { meetups } from "../../queries/meetupQueries";
 
 class Meetups extends Component {
-  
   displayMeetups() {
     const data = this.props.data;
 
-    if(data.loading) {
+    if (data.loading) {
       return (
         <Col>
-          <FontAwesomeIcon
-            icon="spinner" 
-            spin 
-            size="3x"
-          />
+          <FontAwesomeIcon icon="spinner" spin size="3x" />
         </Col>
       );
     } else {
@@ -34,9 +29,14 @@ class Meetups extends Component {
           <Card>
             <CardHeader>{meetup.topic}</CardHeader>
             <CardBody>
-              <CardText>On <b>{meetup.date}</b> the meetup starts from <b>{meetup.start_time}</b> to <b>{meetup.end_time}</b>.</CardText>
+              <CardText>
+                On <b>{meetup.date}</b> the meetup starts from{" "}
+                <b>{meetup.start_time}</b> to <b>{meetup.end_time}</b>.
+              </CardText>
               <CardText>Our speaaker is {meetup.speaker} </CardText>
-              <Button outline color="secondary" block>Register</Button>
+              <Button outline color="secondary" block>
+                Register
+              </Button>
             </CardBody>
           </Card>
         </Col>
@@ -52,12 +52,10 @@ class Meetups extends Component {
             <h1>Upcoming Meetups</h1>
           </Col>
         </Row>
-        <Row>
-          { this.displayMeetups() }
-        </Row>
+        <Row>{this.displayMeetups()}</Row>
       </Container>
     );
-  }  
-};
+  }
+}
 
 export default graphql(meetups)(Meetups);

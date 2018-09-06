@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { 
+import React, { Component } from "react";
+import {
   Navbar,
   NavbarToggler,
   NavbarBrand,
@@ -7,11 +7,10 @@ import {
   NavItem,
   NavLink,
   Collapse,
-  Container,
-} from 'reactstrap';
+  Container
+} from "reactstrap";
 
-import { Logo } from './Logo';
-
+import { Logo } from "./Logo";
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class NavigationBar extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false
-    }
+    };
   }
 
   toggle() {
@@ -43,7 +42,9 @@ class NavigationBar extends Component {
                 <NavLink href="/components/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">Meetups</NavLink>
+                <NavLink href="https://github.com/reactstrap/reactstrap">
+                  Meetups
+                </NavLink>
               </NavItem>
             </Nav>
           </Collapse>
