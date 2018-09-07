@@ -5,8 +5,9 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 
 import "./App.css";
 import { NavigationBar } from "./components/Common";
-import Meetups from "./components/Meetups/Meetups";
 import Header from "./components/Header/Header";
+import About from "./components/About/About";
+import Meetups from "./components/Meetups/Meetups";
 import Footer from "./components/Footer/Footer";
 
 // add icons to the library
@@ -18,6 +19,7 @@ class App extends Component {
       <div className="App">
         <NavigationBar />
         <Header />
+        <About />
         <Meetups />
         <Footer />
       </div>
