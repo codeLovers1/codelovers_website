@@ -37,14 +37,12 @@ class NavigationBar extends Component {
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav className="ml-auto text-uppercase" navbar>
               <NavItem>
-                <NavLink href="/components/">Home</NavLink>
+                <NavLink href="#">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">
-                  Meetups
-                </NavLink>
+                <NavLink href="#">Meetups</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

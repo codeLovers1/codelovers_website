@@ -12,6 +12,7 @@ import {
   Button
 } from "reactstrap";
 import { meetups } from "../../queries/meetupQueries";
+import "./Meetup.css";
 
 class Meetups extends Component {
   displayMeetups() {
@@ -46,14 +47,16 @@ class Meetups extends Component {
 
   render() {
     return (
-      <Container>
-        <Row className="mt-4">
-          <Col>
-            <h1>Upcoming Meetups</h1>
-          </Col>
-        </Row>
-        <Row>{this.displayMeetups()}</Row>
-      </Container>
+      <div className="Meetup-section py-3">
+        <Container>
+          <Row>
+            <Col>
+              <h1>Upcoming Meetups</h1>
+            </Col>
+          </Row>
+          <Row>{this.displayMeetups()}</Row>
+        </Container>
+      </div>
     );
   }
 }
