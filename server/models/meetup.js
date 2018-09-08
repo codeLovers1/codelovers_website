@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const meetupSchema = new Schema({
@@ -22,7 +22,7 @@ const meetupSchema = new Schema({
   }
 });
 
-const Meetup = module.export = mongoose.model('Meetup', meetupSchema);
+const Meetup = (module.export = mongoose.model("Meetup", meetupSchema));
 
 // get all meetups
 module.exports.getMeetups = () => {
@@ -35,7 +35,7 @@ module.exports.getMeetup = (id, callback) => {
 };
 
 // create meetup
-module.exports.createMeetup = (meetup) => {
+module.exports.createMeetup = meetup => {
   const result = new Meetup(meetup);
   result.save();
   return result;
