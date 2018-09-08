@@ -9,6 +9,7 @@ import {
   Collapse,
   Container
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 import { Logo } from "./Logo";
 
@@ -39,10 +40,14 @@ class NavigationBar extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto text-uppercase" navbar>
               <NavItem>
-                <NavLink href="#">Home</NavLink>
+                <NavLink tag={Link} to="/">
+                  Home
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#">Meetups</NavLink>
+                <NavLink tag={Link} to="/register">
+                  Register
+                </NavLink>
               </NavItem>
             </Nav>
           </Collapse>

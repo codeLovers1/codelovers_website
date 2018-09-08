@@ -7,6 +7,7 @@ import registerServiceWorker from "./registerServiceWorker";
 
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import { BrowserRouter } from "react-router-dom";
 
 // Apollo Setup
 const apolloClient = new ApolloClient({
@@ -14,9 +15,11 @@ const apolloClient = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider client={apolloClient}>
-    <App />
-  </ApolloProvider>,
+  <BrowserRouter>
+    <ApolloProvider client={apolloClient}>
+      <App />
+    </ApolloProvider>
+  </BrowserRouter>,
   document.getElementById("root")
 );
 registerServiceWorker();
