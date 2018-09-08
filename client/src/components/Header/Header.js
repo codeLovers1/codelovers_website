@@ -1,5 +1,6 @@
 import React from "react";
 import { Container } from "reactstrap";
+import "./Header.css";
 
 const Header = props => (
   <header className="App-header px-2">

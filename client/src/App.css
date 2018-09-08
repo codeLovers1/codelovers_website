@@ -12,25 +12,6 @@
   height: 40px;
 }
 
-.App-title {
-  font-size: 2.1rem;
-}
-
-.App-about-section {
-  height: 200px;
-}
-
-.App-header {
-  background: url("./images/bg.jpg") no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 400px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
 .App-intro {
   font-size: large;
 }

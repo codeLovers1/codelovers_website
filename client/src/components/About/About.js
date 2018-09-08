@@ -1,20 +1,21 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
+import "./About.css";
 
 const About = props => (
-  <Container>
-    <Row>
-      <Col>
-        <div className="App-about-section pt-4">
+  <div className="About-section py-3">
+    <Container>
+      <Row>
+        <Col>
           <h1>About Us</h1>
           <p>
             Community of Developers based in Hargeisa. We meetup and hack once
             in every 2 weeks, discussing about new technologies
           </p>
-        </div>
-      </Col>
-    </Row>
-  </Container>
+        </Col>
+      </Row>
+    </Container>
+  </div>
 );
 
 export default About;
