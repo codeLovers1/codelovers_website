@@ -1,24 +1,29 @@
 import React, { Component } from "react";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSpinner, faCopyright } from "@fortawesome/free-solid-svg-icons";
-import { fab } from "@fortawesome/free-brands-svg-icons";
 import { Switch, Route } from "react-router-dom";
-
+import { NavigationBar } from "./components/Common/";
+import Footer from "./components/Footer/Footer";
+import "./loadIcons";
 import "./App.css";
 import routes from "./routes";
 
-// add icons to the library
-library.add(faSpinner, faCopyright, fab);
-
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      authenticated: false
+    };
+  }
   render() {
     return (
       <div className="App">
+        <NavigationBar authenticated={this.state.authenticated} />
         <Switch>
           {routes.map((route, i) => (
             <Route key={i} {...route} />
           ))}
         </Switch>
+        <Footer />
       </div>
     );
   }
