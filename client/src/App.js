@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 import "./loadIcons";
 import "./App.css";
 import routes from "./routes";
+import { auth } from "./firebase/firebase";
 
 class App extends Component {
   constructor() {
@@ -14,6 +15,21 @@ class App extends Component {
       authenticated: false
     };
   }
+
+  componentWillMount() {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          authenticated: true
+        });
+      } else {
+        this.setState({
+          authenticated: false
+        });
+      }
+    });
+  }
+
   render() {
     return (
       <div className="App">

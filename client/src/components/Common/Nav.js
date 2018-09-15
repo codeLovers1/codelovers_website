@@ -11,6 +11,7 @@ import {
   Container
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { SignOut } from "../../firebase/auth";
 
 import { Logo } from "./Logo";
 
@@ -47,7 +48,7 @@ class NavigationBar extends Component {
               </NavItem>
               {this.props.authenticated ? (
                 <NavItem>
-                  <NavLink tag={Link} to="/logout">
+                  <NavLink onClick={SignOut}>
                     <FontAwesomeIcon icon="sign-out-alt" />
                   </NavLink>
                 </NavItem>
