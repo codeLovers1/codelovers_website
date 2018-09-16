@@ -1,5 +1,6 @@
 import Home from "./pages/Home/Home";
 import Registration from "./pages/Registration/Registration";
+import Logout from "./components/Logout/Logout";
 
 const routes = [
   {
@@ -10,6 +11,10 @@ const routes = [
   {
     path: "/register",
     component: Registration
+  },
+  {
+    path: "/logout",
+    component: Logout
   }
 ];
 

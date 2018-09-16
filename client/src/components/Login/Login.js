@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import {
   Container,
   Row,
@@ -12,9 +13,11 @@ import {
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  // SignInWithEmailAndPassword,
+  SignInWithEmailAndPassword,
+  CreateUserWithEmailAndPassword,
   SignInWithGuthub
 } from "../../firebase/auth";
+import { auth } from "../../firebase/firebase";
 import "./Login.css";
 
 class Login extends Component {
@@ -22,7 +25,8 @@ class Login extends Component {
     super();
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      redirect: false
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.authWithEmailAndPassword = this.authWithEmailAndPassword.bind(this);
@@ -31,17 +35,48 @@ class Login extends Component {
 
   authWithEmailAndPassword(event) {
     event.preventDefault();
-    console.table([
-      {
-        email: this.state.email,
-        password: this.state.password
-      }
-    ]);
+
+    const { email, password } = this.state;
+    // Fetch providers to check if the user already used one.
+    auth
+      .fetchSignInMethodsForEmail(email)
+      .then(providers => {
+        if (providers.length === 0) {
+          // create user
+          return CreateUserWithEmailAndPassword(email, password);
+        } else if (providers.indexOf("password") === -1) {
+          // they used facebook
+          // this.loginForm.reset();
+          console.log("you used Github");
+        } else {
+          // sign them in
+          return SignInWithEmailAndPassword(email, password);
+        }
+      })
+      .then(user => {
+        console.log("here");
+        if (user) {
+          // this.loginForm.reset();
+          this.setState({
+            redirect: true
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
   }
 
   authWithGithub() {
-    console.log("Auth with Github");
-    SignInWithGuthub();
+    SignInWithGuthub().then((result, error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        this.setState({
+          redirect: true
+        });
+      }
+    });
   }
 
   handleInputChange(event) {
@@ -53,10 +88,13 @@ class Login extends Component {
     this.setState({
       [name]: value
     });
-    console.log(this.state);
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <Container>
         <Row>

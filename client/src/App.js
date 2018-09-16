@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import { NavigationBar } from "./components/Common/";
+import { NavigationBar, Loader } from "./components/Common/";
 import Footer from "./components/Footer/Footer";
 import "./loadIcons";
 import "./App.css";
@@ -12,7 +12,8 @@ class App extends Component {
     super();
 
     this.state = {
-      authenticated: false
+      authenticated: false,
+      loading: true
     };
   }
 
@@ -20,17 +21,24 @@ class App extends Component {
     auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
-          authenticated: true
+          authenticated: true,
+          loading: false
         });
+        console.log(user);
       } else {
         this.setState({
-          authenticated: false
+          authenticated: false,
+          loading: false
         });
       }
     });
   }
 
   render() {
+    if (this.state.loading) {
+      return <Loader size="4x" classname="App-loading" text="Loading" />;
+    }
+
     return (
       <div className="App">
         <NavigationBar authenticated={this.state.authenticated} />
