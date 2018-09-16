@@ -1,14 +1,9 @@
 import React from "react";
-import { NavigationBar } from "../../components/Common";
-import Footer from "../../components/Footer/Footer";
+import Login from "../../components/Login/Login";
 
 const Registration = props => (
-  <div>
-    <NavigationBar />
-    <div>
-      <h1>Registrations!!!</h1>
-    </div>
-    <Footer />
+  <div className="mt-4 mb-4">
+    <Login />
   </div>
 );
 

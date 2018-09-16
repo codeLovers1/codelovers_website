@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Navbar,
   NavbarToggler,
@@ -40,15 +41,23 @@ class NavigationBar extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto text-uppercase" navbar>
               <NavItem>
-                <NavLink tag={Link} to="/">
-                  Home
+                <NavLink tag={Link} to="/" aria-label="Home">
+                  <FontAwesomeIcon icon="home" />
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/register">
-                  Register
-                </NavLink>
-              </NavItem>
+              {this.props.authenticated ? (
+                <NavItem>
+                  <NavLink tag={Link} to="/logout" aria-label="Logout">
+                    <FontAwesomeIcon icon="sign-out-alt" />
+                  </NavLink>
+                </NavItem>
+              ) : (
+                <NavItem>
+                  <NavLink tag={Link} to="/register">
+                    Register / SignIn
+                  </NavLink>
+                </NavItem>
+              )}
             </Nav>
           </Collapse>
         </Container>

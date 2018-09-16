@@ -1,24 +1,53 @@
 import React, { Component } from "react";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSpinner, faCopyright } from "@fortawesome/free-solid-svg-icons";
-import { fab } from "@fortawesome/free-brands-svg-icons";
 import { Switch, Route } from "react-router-dom";
-
+import { NavigationBar, Loader } from "./components/Common/";
+import Footer from "./components/Footer/Footer";
+import "./loadIcons";
 import "./App.css";
 import routes from "./routes";
-
-// add icons to the library
-library.add(faSpinner, faCopyright, fab);
+import { auth } from "./firebase/firebase";
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      authenticated: false,
+      loading: true
+    };
+  }
+
+  componentWillMount() {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          authenticated: true,
+          loading: false
+        });
+        console.log(user);
+      } else {
+        this.setState({
+          authenticated: false,
+          loading: false
+        });
+      }
+    });
+  }
+
   render() {
+    if (this.state.loading) {
+      return <Loader size="4x" classname="App-loading" text="Loading" />;
+    }
+
     return (
       <div className="App">
+        <NavigationBar authenticated={this.state.authenticated} />
         <Switch>
           {routes.map((route, i) => (
             <Route key={i} {...route} />
           ))}
         </Switch>
+        <Footer />
       </div>
     );
   }

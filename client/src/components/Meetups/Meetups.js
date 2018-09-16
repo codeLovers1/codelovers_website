@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Loader } from "../Common/";
 import {
   Container,
   Row,
@@ -19,11 +19,7 @@ class Meetups extends Component {
     const data = this.props.data;
 
     if (data.loading) {
-      return (
-        <Col>
-          <FontAwesomeIcon icon="spinner" spin size="3x" />
-        </Col>
-      );
+      return <Loader size="3x" />;
     } else {
       return data.meetups.map(meetup => (
         <Col key={meetup.id} xs="12" sm="6" md="3" className="mb-3">
