@@ -6,7 +6,7 @@ const Loader = props => (
   <Container className={props.classname}>
     <Row>
       <Col className="text-center">
-        <p>{props.text}</p>
+        <h3>{props.text}</h3>
         <FontAwesomeIcon icon="spinner" spin size={props.size} />
       </Col>
     </Row>

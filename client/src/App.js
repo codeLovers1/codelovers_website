@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { NavigationBar, Loader } from "./components/Common/";
 import Footer from "./components/Footer/Footer";
-import "./loadIcons";
-import "./App.css";
+import "./utils/loadIcons";
 import routes from "./routes";
 import { auth } from "./firebase/firebase";
+
+import "./App.css";
 
 class App extends Component {
   constructor() {

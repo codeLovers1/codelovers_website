@@ -12,6 +12,8 @@ import {
   Alert
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Intent } from "@blueprintjs/core";
+import { AppToaster } from "../../utils/";
 import {
   SignInWithEmailAndPassword,
   CreateUserWithEmailAndPassword,
@@ -28,6 +30,7 @@ class Login extends Component {
       password: "",
       redirect: false
     };
+    this.loginForm = React.createRef();
     this.handleInputChange = this.handleInputChange.bind(this);
     this.authWithEmailAndPassword = this.authWithEmailAndPassword.bind(this);
     this.authWithGithub = this.authWithGithub.bind(this);
@@ -42,19 +45,22 @@ class Login extends Component {
       .fetchSignInMethodsForEmail(email)
       .then(providers => {
         if (providers.length === 0) {
+          this.loginForm.current.reset();
           // create user
           return CreateUserWithEmailAndPassword(email, password);
         } else if (providers.indexOf("password") === -1) {
           // they used facebook
-          // this.loginForm.reset();
-          console.log("you used Github");
+          this.loginForm.current.reset();
+          this.toastIt(
+            Intent.WARNING,
+            "Maybe, you used different method to sign-in, such as 'Github'"
+          );
         } else {
           // sign them in
           return SignInWithEmailAndPassword(email, password);
         }
       })
       .then(user => {
-        console.log("here");
         if (user) {
           // this.loginForm.reset();
           this.setState({
@@ -63,19 +69,28 @@ class Login extends Component {
         }
       })
       .catch(error => {
-        console.log(error.message);
+        this.loginForm.current.reset();
+        this.toastIt(Intent.DANGER, error.message);
       });
   }
 
   authWithGithub() {
-    SignInWithGuthub().then((result, error) => {
-      if (error) {
-        console.log(error);
-      } else {
+    SignInWithGuthub()
+      .then(result => {
         this.setState({
           redirect: true
         });
-      }
+      })
+      .catch(error => {
+        this.loginForm.current.reset();
+        this.toastIt(Intent.DANGER, error.message);
+      });
+  }
+
+  toastIt(classname, message) {
+    AppToaster.show({
+      intent: classname,
+      message: message
     });
   }
 
@@ -126,9 +141,7 @@ class Login extends Component {
               onSubmit={event => {
                 this.authWithEmailAndPassword(event);
               }}
-              ref={form => {
-                this.loginForm = form;
-              }}
+              innerRef={this.loginForm}
             >
               <FormGroup>
                 <Label for="email" className="float-left">
@@ -139,6 +152,7 @@ class Login extends Component {
                   name="email"
                   id="email"
                   placeholder="Your Email"
+                  required
                   onChange={event => {
                     this.handleInputChange(event);
                   }}
@@ -153,6 +167,7 @@ class Login extends Component {
                   name="password"
                   id="password"
                   placeholder="Password"
+                  required
                   onChange={event => {
                     this.handleInputChange(event);
                   }}
