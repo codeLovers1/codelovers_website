@@ -47,7 +47,7 @@ class Meetups extends Component {
         <Container>
           <Row>
             <Col>
-              <h1>Upcoming Meetups</h1>
+              <h1>Upcoming Activities</h1>
             </Col>
           </Row>
           <Row>{this.displayMeetups()}</Row>

@@ -8,9 +8,13 @@ const About = props => (
       <Row>
         <Col>
           <h1>About Us</h1>
-          <p>
-            Community of Developers based in Hargeisa. We meetup and hack once
-            in every 2 weeks, discussing about new technologies
+          <p className="text-left">
+            We are community of developers based in Somaliland. We meetup once
+            in every 2 weeks and learn together about technology. Everyone who
+            has the interest to code can join us. Doesn't matter what background
+            you are coming from. We welcome every skill level. Our Goal is to
+            introduce our society the importance of programming and technology
+            as general.
           </p>
         </Col>
       </Row>
