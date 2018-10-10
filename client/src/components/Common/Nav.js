@@ -45,6 +45,11 @@ class NavigationBar extends Component {
                   <FontAwesomeIcon icon="home" />
                 </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to="/about" aria-label="About">
+                  <FontAwesomeIcon icon="info-circle" />
+                </NavLink>
+              </NavItem>
               {this.props.authenticated ? (
                 <NavItem>
                   <NavLink tag={Link} to="/logout" aria-label="Logout">
@@ -53,7 +58,7 @@ class NavigationBar extends Component {
                 </NavItem>
               ) : (
                 <NavItem>
-                  <NavLink tag={Link} to="/register">
+                  <NavLink tag={Link} to="/register" aria-label="Sigin/Signout">
                     Register / SignIn
                   </NavLink>
                 </NavItem>

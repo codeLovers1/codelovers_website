@@ -17,6 +17,10 @@ body {
   padding: 0;
 }
 
+p {
+  font-size: 1rem;
+}
+
 .SlackInvitation {
   height: 15%;
 }
