@@ -17,21 +17,21 @@ const Footer = () => (
           <Row>
             <Col xs="4" sm="4" md={{ size: 1, offset: 5 }}>
               <SocailMediaIcon
-                url="https://instagram.com"
+                url="https://www.instagram.com/codelovers_"
                 iconName="instagram"
                 iconSize="2x"
               />
             </Col>
             <Col xs="4" sm="4" md="1">
               <SocailMediaIcon
-                url="https://twitter.com"
+                url="https://twitter.com/CodeLovers_"
                 iconName="twitter"
                 iconSize="2x"
               />
             </Col>
             <Col xs="4" sm="4" md="1">
               <SocailMediaIcon
-                url="https://github.com"
+                url="https://github.com/codeLovers1"
                 iconName="github"
                 iconSize="2x"
               />
