@@ -8,18 +8,11 @@ import {
   FormGroup,
   Label,
   Input,
-  Button,
-  Alert
+  Button
 } from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Intent } from "@blueprintjs/core";
 import { AppToaster } from "../../utils/";
-import {
-  SignInWithEmailAndPassword,
-  CreateUserWithEmailAndPassword,
-  SignInWithGuthub
-} from "../../firebase/auth";
-import { auth } from "../../firebase/firebase";
+import { SignInWithEmailAndPassword } from "../../firebase/auth";
 import "./Login.css";
 
 class Login extends Component {
@@ -33,53 +26,21 @@ class Login extends Component {
     this.loginForm = React.createRef();
     this.handleInputChange = this.handleInputChange.bind(this);
     this.authWithEmailAndPassword = this.authWithEmailAndPassword.bind(this);
-    this.authWithGithub = this.authWithGithub.bind(this);
   }
 
   authWithEmailAndPassword(event) {
     event.preventDefault();
 
     const { email, password } = this.state;
-    // Fetch providers to check if the user already used one.
-    auth
-      .fetchSignInMethodsForEmail(email)
-      .then(providers => {
-        if (providers.length === 0) {
-          this.loginForm.current.reset();
-          // create user
-          return CreateUserWithEmailAndPassword(email, password);
-        } else if (providers.indexOf("password") === -1) {
-          // they used facebook
-          this.loginForm.current.reset();
-          this.toastIt(
-            Intent.WARNING,
-            "Maybe, you used different method to sign-in, such as 'Github'"
-          );
-        } else {
-          // sign them in
-          return SignInWithEmailAndPassword(email, password);
-        }
-      })
+
+    SignInWithEmailAndPassword(email, password)
       .then(user => {
         if (user) {
-          // this.loginForm.reset();
+          this.loginForm.reset();
           this.setState({
             redirect: true
           });
         }
-      })
-      .catch(error => {
-        this.loginForm.current.reset();
-        this.toastIt(Intent.DANGER, error.message);
-      });
-  }
-
-  authWithGithub() {
-    SignInWithGuthub()
-      .then(result => {
-        this.setState({
-          redirect: true
-        });
       })
       .catch(error => {
         this.loginForm.current.reset();
@@ -107,7 +68,7 @@ class Login extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/" />;
+      return <Redirect to="/admin" />;
     }
 
     return (
@@ -119,24 +80,6 @@ class Login extends Component {
             md={{ size: 6, offset: 3 }}
             className="Login-form"
           >
-            <Button
-              color="secondary"
-              block
-              onClick={() => this.authWithGithub()}
-            >
-              Sign In with <FontAwesomeIcon icon={["fab", "github"]} /> Github
-            </Button>
-            <hr className="mt-3 mb-3" />
-            <Alert color="secondary text-left">
-              <h4 className="alert-heading">
-                <FontAwesomeIcon icon="info-circle" /> NOTE
-              </h4>
-              <p>
-                If you don't have account and you don't have Github, this form
-                will create one for you. If you already got account it will sign
-                in you.
-              </p>
-            </Alert>
             <Form
               onSubmit={event => {
                 this.authWithEmailAndPassword(event);

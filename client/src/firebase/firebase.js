@@ -25,7 +25,4 @@ firebase.initializeApp(devConfig);
 
 const auth = firebase.auth();
 
-// Providers
-const githubAuthProvider = new firebase.auth.GithubAuthProvider();
-
-export { firebase, auth, githubAuthProvider };
+export { firebase, auth };

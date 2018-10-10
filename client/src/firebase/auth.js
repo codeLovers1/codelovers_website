@@ -1,4 +1,4 @@
-import { auth, githubAuthProvider } from "./firebase";
+import { auth } from "./firebase";
 
 // --> Email and Password
 
@@ -19,8 +19,3 @@ export const PasswordReset = email => auth.sendPasswordResetEmail(email);
 // Password Change
 export const PasswordUpdate = password =>
   auth.currentUser.updatePassword(password);
-
-//  --> Auth Providers
-
-// github
-export const SignInWithGuthub = () => auth.signInWithPopup(githubAuthProvider);
