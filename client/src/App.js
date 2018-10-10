@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import { NavigationBar, Loader } from "./components/Common/";
+import {
+  NavigationBar,
+  AdminNavigationBar,
+  Loader
+} from "./components/Common/";
 import Footer from "./components/Footer/Footer";
 import "./utils/loadIcons";
-import routes from "./routes";
+import { routes, adminRoutes } from "./routes";
 import { auth } from "./firebase/firebase";
 
 import "./App.css";
@@ -16,9 +20,12 @@ class App extends Component {
       authenticated: false,
       loading: true
     };
+
+    this.location = window.location.pathname;
   }
 
   componentWillMount() {
+    console.log(this.location);
     auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
@@ -42,13 +49,26 @@ class App extends Component {
 
     return (
       <div className="App">
-        <NavigationBar authenticated={this.state.authenticated} />
-        <Switch>
-          {routes.map((route, i) => (
-            <Route key={i} {...route} />
-          ))}
-        </Switch>
-        <Footer />
+        {this.location === "/admin" ? (
+          <div>
+            <AdminNavigationBar authenticated={this.state.authenticated} />
+            <Switch>
+              {adminRoutes.map((route, i) => (
+                <Route key={i} {...route} />
+              ))}
+            </Switch>
+          </div>
+        ) : (
+          <div>
+            <NavigationBar />
+            <Switch>
+              {routes.map((route, i) => (
+                <Route key={i} {...route} />
+              ))}
+            </Switch>
+            <Footer />
+          </div>
+        )}
       </div>
     );
   }

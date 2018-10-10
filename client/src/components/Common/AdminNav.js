@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 import { Logo } from "./Logo";
 
-class NavigationBar extends Component {
+class AdminNavigationBar extends Component {
   constructor(props) {
     super(props);
 
@@ -41,15 +41,28 @@ class NavigationBar extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto text-uppercase" navbar>
               <NavItem>
-                <NavLink tag={Link} to="/" aria-label="Home">
-                  <FontAwesomeIcon icon="home" /> Home
+                <NavLink tag={Link} to="/addMeetup" aria-label="Add Meetup">
+                  <FontAwesomeIcon icon="plus" /> Add Meetup
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/about" aria-label="About">
-                  <FontAwesomeIcon icon="info-circle" /> About Us
+                <NavLink tag={Link} to="/signup" aria-label="Signup">
+                  <FontAwesomeIcon icon="user-plus" /> Signup
                 </NavLink>
               </NavItem>
+              {this.props.authenticated ? (
+                <NavItem>
+                  <NavLink tag={Link} to="/logout" aria-label="Logout">
+                    <FontAwesomeIcon icon="sign-out-alt" />
+                  </NavLink>
+                </NavItem>
+              ) : (
+                <NavItem>
+                  <NavLink tag={Link} to="/login" aria-label="Login">
+                    <FontAwesomeIcon icon="sign-in-alt" /> Login
+                  </NavLink>
+                </NavItem>
+              )}
             </Nav>
           </Collapse>
         </Container>
@@ -58,4 +71,4 @@ class NavigationBar extends Component {
   }
 }
 
-export { NavigationBar };
+export { AdminNavigationBar };
