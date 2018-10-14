@@ -23,7 +23,6 @@ class Login extends Component {
       password: "",
       redirect: false
     };
-    this.loginForm = React.createRef();
     this.handleInputChange = this.handleInputChange.bind(this);
     this.authWithEmailAndPassword = this.authWithEmailAndPassword.bind(this);
   }
@@ -36,14 +35,12 @@ class Login extends Component {
     SignInWithEmailAndPassword(email, password)
       .then(user => {
         if (user) {
-          this.loginForm.reset();
           this.setState({
             redirect: true
           });
         }
       })
       .catch(error => {
-        this.loginForm.current.reset();
         this.toastIt(Intent.DANGER, error.message);
       });
   }
@@ -67,8 +64,12 @@ class Login extends Component {
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to="/admin" />;
+    const { from } = this.props.location.state || {
+      from: { pathname: "/admin" }
+    };
+
+    if (this.state.redirect === true) {
+      return <Redirect to={from} />;
     }
 
     return (
@@ -78,13 +79,12 @@ class Login extends Component {
             xs="12"
             sm="12"
             md={{ size: 6, offset: 3 }}
-            className="Login-form"
+            className="Login-form Login-section"
           >
             <Form
               onSubmit={event => {
                 this.authWithEmailAndPassword(event);
               }}
-              innerRef={this.loginForm}
             >
               <FormGroup>
                 <Label for="email" className="float-left">

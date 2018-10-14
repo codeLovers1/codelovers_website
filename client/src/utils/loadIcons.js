@@ -7,7 +7,8 @@ import {
   faInfoCircle,
   faUserPlus,
   faSignInAlt,
-  faPlus
+  faPlus,
+  faChartPie
 } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
@@ -21,5 +22,6 @@ library.add(
   faInfoCircle,
   faUserPlus,
   faSignInAlt,
-  faPlus
+  faPlus,
+  faChartPie
 );
