@@ -39,31 +39,46 @@ class AdminNavigationBar extends Component {
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto text-uppercase" navbar>
-              <NavItem>
-                <NavLink tag={Link} to="/addMeetup" aria-label="Add Meetup">
-                  <FontAwesomeIcon icon="plus" /> Add Meetup
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/signup" aria-label="Signup">
-                  <FontAwesomeIcon icon="user-plus" /> Signup
-                </NavLink>
-              </NavItem>
-              {this.props.authenticated ? (
+            {this.props.authenticated ? (
+              <Nav className="ml-auto text-uppercase" navbar>
                 <NavItem>
-                  <NavLink tag={Link} to="/logout" aria-label="Logout">
-                    <FontAwesomeIcon icon="sign-out-alt" />
+                  <NavLink
+                    tag={Link}
+                    to="/admin/dashboard"
+                    aria-label="Dashboard"
+                  >
+                    <FontAwesomeIcon icon="chart-pie" /> Dashboard
                   </NavLink>
                 </NavItem>
-              ) : (
                 <NavItem>
-                  <NavLink tag={Link} to="/login" aria-label="Login">
+                  <NavLink
+                    tag={Link}
+                    to="/admin/addMeetup"
+                    aria-label="Add Meetup"
+                  >
+                    <FontAwesomeIcon icon="plus" /> Add Meetup
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} to="/admin/signup" aria-label="Signup">
+                    <FontAwesomeIcon icon="user-plus" /> Signup
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} to="/admin/logout" aria-label="Logout">
+                    <FontAwesomeIcon icon="sign-out-alt" /> Logout
+                  </NavLink>
+                </NavItem>
+              </Nav>
+            ) : (
+              <Nav className="ml-auto text-uppercase" navbar>
+                <NavItem>
+                  <NavLink tag={Link} to="/admin/login" aria-label="Login">
                     <FontAwesomeIcon icon="sign-in-alt" /> Login
                   </NavLink>
                 </NavItem>
-              )}
-            </Nav>
+              </Nav>
+            )}
           </Collapse>
         </Container>
       </Navbar>

@@ -4,3 +4,6 @@ export * from "./SocailMedia";
 export * from "./SlackInvitation";
 export * from "./Loader";
 export * from "./AdminNav";
+export * from "./Layout";
+export * from "./AdminLayout";
+export * from "./PrivateRoute";

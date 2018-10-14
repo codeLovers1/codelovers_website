@@ -4,8 +4,11 @@ import Admin from "./pages/Admin/Admin";
 import Logout from "./components/Logout/Logout";
 
 import Signup from "./components/Signup/Signup";
+import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Login/Login";
 import AddMeetUp from "./components/AddMeetUp/AddMeetUp";
+
+import { PrivateRoute } from "./components/Common/";
 
 const routes = [
   {
@@ -16,28 +19,32 @@ const routes = [
   {
     path: "/about",
     component: About
+  },
+  {
+    path: "/admin",
+    component: Admin
   }
 ];
 
 const adminRoutes = [
   {
-    path: "/admin",
-    component: Admin
-  },
-  {
-    path: "/login",
+    path: "/admin/login",
     component: Login
   },
   {
-    path: "/signup",
-    component: Signup
+    path: "/admin/signup",
+    component: PrivateRoute(Signup)
   },
   {
-    path: "/addMeetup",
-    component: AddMeetUp
+    path: "/admin/dashboard",
+    component: PrivateRoute(Dashboard)
   },
   {
-    path: "/logout",
+    path: "/admin/addMeetup",
+    component: PrivateRoute(AddMeetUp)
+  },
+  {
+    path: "/admin/logout",
     component: Logout
   }
 ];
