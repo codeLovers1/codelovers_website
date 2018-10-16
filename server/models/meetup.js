@@ -15,18 +15,16 @@ const meetupSchema = new Schema({
   topic: {
     type: String,
     required: true
-  },
-  speaker: {
-    type: String,
-    required: true
   }
 });
 
 const Meetup = (module.export = mongoose.model("Meetup", meetupSchema));
 
 // get all meetups
-module.exports.getMeetups = () => {
-  return Meetup.find({});
+module.exports.getMeetups = limit => {
+  return Meetup.find({})
+    .sort({ date: -1 })
+    .limit(limit);
 };
 
 // get specific meetup by id
