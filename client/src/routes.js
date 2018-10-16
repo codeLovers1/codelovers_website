@@ -6,7 +6,7 @@ import Logout from "./components/Logout/Logout";
 import Signup from "./components/Signup/Signup";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Login/Login";
-import AddMeetUp from "./components/AddMeetUp/AddMeetUp";
+import AddMeetup from "./components/AddMeetup/AddMeetup";
 
 import { PrivateRoute } from "./components/Common/";
 
@@ -41,7 +41,7 @@ const adminRoutes = [
   },
   {
     path: "/admin/addMeetup",
-    component: PrivateRoute(AddMeetUp)
+    component: PrivateRoute(AddMeetup)
   },
   {
     path: "/admin/logout",
