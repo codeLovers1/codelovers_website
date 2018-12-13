@@ -1,67 +1,27 @@
 const graphql = require("graphql");
-const {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLID,
-  GraphQLList,
-  GraphQLInt,
-  GraphQLNonNull,
-  GraphQLSchema
-} = graphql;
-const MeetupModel = require("../models/meetup.js");
-const EventModel = require("../models/event.js");
+const { GraphQLObjectType, GraphQLSchema } = graphql;
 
-const meetupFields = {
-  id: { type: GraphQLID },
-  start_time: { type: GraphQLString },
-  end_time: { type: GraphQLString },
-  date: { type: new GraphQLNonNull(GraphQLString) },
-  topic: { type: new GraphQLNonNull(GraphQLString) }
-};
-
-// => Types
-const MeetUpType = new GraphQLObjectType({
-  name: "Meetup",
-  fields: () => meetupFields
-});
+// => Schemas
+const meetupSchema = require("./meetupSchema.js");
+const eventSchema = require("./eventSchema.js");
+const speakerSchema = require("./SpeakerSchema.js");
 
 // => Queries and Mutations
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    meetup: {
-      type: MeetUpType,
-      args: {
-        id: meetupFields.id
-      },
-      resolve(parent, args) {
-        return MeetupModel.getMeetup(args.id);
-      }
-    },
-    meetups: {
-      type: new GraphQLList(MeetUpType),
-      args: {
-        limit: {
-          type: GraphQLInt
-        }
-      },
-      resolve(parent, args) {
-        return MeetupModel.getMeetups(args.limit);
-      }
-    }
+    ...meetupSchema.queryFields,
+    ...eventSchema.queryFields,
+    ...speakerSchema.queryFields
   }
 });
 
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    addMeetup: {
-      type: MeetUpType,
-      args: meetupFields,
-      resolve(parent, args) {
-        return MeetupModel.createMeetup(args);
-      }
-    }
+    ...meetupSchema.mutationFields,
+    ...eventSchema.mutationFields
+    // ...speakerSchema.mutationFields
   }
 });
 
