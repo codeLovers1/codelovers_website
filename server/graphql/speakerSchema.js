@@ -1,35 +1,22 @@
 const graphql = require("graphql");
 const {
   GraphQLObjectType,
-  GraphQLString,
   GraphQLID,
   GraphQLList,
   GraphQLInt,
   GraphQLNonNull,
   GraphQLSchema
 } = graphql;
-const EventType = require("./eventSchema.js").EventType;
+
 const SpeakerModel = require("../models/speaker.js");
+const { SpeakerType, SpeakerInput, EventType } = require("./types.js");
 
-const speakerFields = {
-  id: { type: GraphQLID },
-  name: { type: GraphQLString },
-  title: { type: GraphQLString },
-  bio: { type: GraphQLString },
-  events: { type: GraphQLList(EventType) }
-};
-
-// => Types
-const SpeakerType = new GraphQLObjectType({
-  name: "Speaker",
-  fields: () => speakerFields
-});
-
+// => Queries
 const queryFields = {
   speaker: {
     type: SpeakerType,
     args: {
-      id: speakerFields.id
+      id: { type: GraphQLID }
     },
     resolve(parent, args) {
       return SpeakerModel.getSpeaker(args.id);
@@ -48,17 +35,34 @@ const queryFields = {
   }
 };
 
+// => Mutations
 const mutationFields = {
   addSpeaker: {
     type: SpeakerType,
-    args: speakerFields,
+    args: {
+      input: {
+        type: new GraphQLNonNull(SpeakerInput)
+      }
+    },
     resolve(parent, args) {
-      return SpeakerModel.createSpeaker(args);
+      return SpeakerModel.createSpeaker(args.input);
+    }
+  },
+  addSpeakerEvents: {
+    type: SpeakerType,
+    args: {
+      speakerId: { type: GraphQLID },
+      events: { type: new GraphQLList(GraphQLID) }
+    },
+    resolve(parent, args) {
+      const event = SpeakerModel.addSpeakerEvents(args.speakerId, args.events);
+      return event.then(result => result);
     }
   }
 };
 
 module.exports = {
+  SpeakerType,
   queryFields,
   mutationFields
 };
