@@ -4,7 +4,7 @@ const { GraphQLObjectType, GraphQLSchema } = graphql;
 // => Schemas
 const meetupSchema = require("./meetupSchema.js");
 const eventSchema = require("./eventSchema.js");
-const speakerSchema = require("./SpeakerSchema.js");
+const speakerSchema = require("./speakerSchema.js");
 
 // => Queries and Mutations
 const RootQuery = new GraphQLObjectType({
@@ -20,8 +20,8 @@ const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     ...meetupSchema.mutationFields,
-    ...eventSchema.mutationFields
-    // ...speakerSchema.mutationFields
+    ...eventSchema.mutationFields,
+    ...speakerSchema.mutationFields
   }
 });
 

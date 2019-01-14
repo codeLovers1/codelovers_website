@@ -10,7 +10,7 @@ const app = express();
 
 // middlewares
 
-// allow cross-origin requests
+// allow cross-origin resource sharing
 app.use(cors());
 
 // connect express to graphql
