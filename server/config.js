@@ -1,5 +1,5 @@
 const dbConfig = {
-  url: process.env.DB_URL 
+  url: process.env.CODELOVERS_DB_URL
 };
 
 module.exports = dbConfig;

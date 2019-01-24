@@ -1,6 +1,6 @@
 import firebase from "firebase";
 
-const devConfig = {
+const config = {
   apiKey: process.env.REACT_APP_APIKEY,
   authDomain: process.env.REACT_APP_AUTHDOMAIN,
   databaseURL: process.env.REACT_APP_DATABASEURL,
@@ -9,19 +9,8 @@ const devConfig = {
   messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID
 };
 
-// const prodConfig = {
-//   apiKey: process.env.APIKEY,
-//   authDomain: process.env.AUTHDOMAIN,
-//   databaseURL: process.env.DATABASEURL,
-//   projectId: process.env.PROJECTID,
-//   storageBucket: process.env.STORAGEBUCKET,
-//   messagingSenderId: process.env.MESSAGINGSENDERID
-// };
-
-// const config = process.env.NODE_ENV === "production" ? prodConfig : devConfig;
-
 // initialize the app
-firebase.initializeApp(devConfig);
+firebase.initializeApp(config);
 
 const auth = firebase.auth();
 

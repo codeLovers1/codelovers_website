@@ -27,6 +27,7 @@ mongoose.connect(
   dbConfig.url,
   { useNewUrlParser: true }
 );
+
 mongoose.connection.once("open", () => {
   console.log("conneted to database");
 });
