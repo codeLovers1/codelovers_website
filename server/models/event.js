@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-// const SpeakerModel = require("./speaker.js");
 
 const eventSchema = new Schema({
   start_time: {
